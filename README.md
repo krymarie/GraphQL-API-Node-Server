@@ -39,8 +39,6 @@ https://github.com/krymarie/GraphQL-API-Node-Server/blob/master/src/schema.graph
 
 ## ReadMe file accurately describe your server install, run process and, how to use the APIs.
 
-## \*For Once Complete
-
 ```
 npm install
 ```
@@ -69,4 +67,4 @@ npm run dev
 npm start
 ```
 
-# More info here about how to use api...
+## More info here about how to use api...
