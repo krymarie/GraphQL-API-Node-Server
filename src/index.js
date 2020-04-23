@@ -7,15 +7,38 @@ type Query {
 }
 
 type Mutation {
-    post(url: String!, description: String!): Link!
+  post(url: String!, description: String!): Link!
 }
 
 type Link {
   id: ID!
   description: String!
+  url: String!
 }
 
-type AddClient {   
+type Client {
+  id: String!
+  name: String!
+  address: String!
+  phone: String!
+  interestLevel: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  Address(address: String): [Client!]!
+  Client(id: ID): Client
+  Clients(searchString: String): [Client!]!
+}
+
+type Mutation {
+  AddClient(data: NewClient!): Client!
+  NewClient(data: NewClient!, where: UniqueID!): Client
+  ClientUpdate(data: UniqueID!, where: UniqueID!): Client
+} 
+
+AddClient {   
   id: String!
   name: String!
    address: String!

@@ -1,10 +1,10 @@
 # GraphQL-API-Node-Server
 
 ## Thor to build please run the folowing
+
 ```
 npm install
 ```
-
 
 ```
 node src/index.js
@@ -21,15 +21,17 @@ http://localhost:4000
 https://github.com/krymarie/GraphQL-API-Node-Server/tree/master/prisma
 
 ## Docker-based MongoDB as my data store
---added on my newer repo another branch https://github.com/krymarie/final-api/blob/master/app.js#L5 
+
+--added on my newer repo another branch https://github.com/krymarie/final-api/blob/master/app.js#L5
 --this repo is currently serving
 
 ## 3 Query resolvers get data from server
+
 https://github.com/krymarie/GraphQL-API-Node-Server/blob/master/src/index.js#L38
 
-
 ## Mutation resolvers allow users to create, update
--create 
+
+https://github.com/krymarie/GraphQL-API-Node-Server/blob/master/src/schema.graphql#L58
 
 ## Datastore contains 25 items
 
@@ -37,7 +39,7 @@ https://github.com/krymarie/GraphQL-API-Node-Server/blob/master/src/index.js#L38
 
 ## ReadMe file accurately describe your server install, run process and, how to use the APIs.
 
-## For Once Complete
+## \*For Once Complete
 
 ```
 npm install
