@@ -1,38 +1,47 @@
 # GraphQL-API-Node-Server
 
-## Thor to build please run the folowing for now
+## Thor to build please run the folowing
+```
+npm install
+```
 
-## Once I am complete the build instructions below will be replaced
-
-## Prisma as your data modeling tool
 
 ```
 node src/index.js
 ```
 
-- `node src/index.js`
-- the server is now running on prisma http://localhost:4000
+Server is now running on prisma http://localhost:4000
 
-## Docker-based PostgreSQL, MySQL, or MongoDB as your data store
+## Once completed the build instructions below will be needed
+
+## Prisma as your data modeling tool
+
+http://localhost:4000
+
+https://github.com/krymarie/GraphQL-API-Node-Server/tree/master/prisma
+
+## Docker-based MongoDB as my data store
+--added on my newer repo another branch https://github.com/krymarie/final-api/blob/master/app.js#L5 
+--this repo is currently serving
 
 ## 3 Query resolvers get data from server
+https://github.com/krymarie/GraphQL-API-Node-Server/blob/master/src/index.js#L38
 
-https://github.com/DGM3780/vue-assignment-krymarie/blob/master/src/components/PomodoroTimer.vue#L9
-https://github.com/DGM3780/vue-assignment-krymarie/blob/master/src/components/PomodoroTimer.vue#L78
 
 ## Mutation resolvers allow users to create, update
+-create 
 
 ## Datastore contains 25 items
 
 ## Deployable locally using Docker
 
---working on that after a python binge
-
 ## ReadMe file accurately describe your server install, run process and, how to use the APIs.
 
 ## For Once Complete
 
-`npm install`
+```
+npm install
+```
 
 ```
 npm run launchDocker

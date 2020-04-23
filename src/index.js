@@ -28,16 +28,16 @@ type AddClient {
 
 let links = [
   {
-    id: "link-0",
-    url: "www.howtographql.com",
-    description: "Fullstack tutorial for GraphQL"
+    id: "0",
+    url: "www.cliantclout.com",
+    phone: "801.555.5555"
   }
 ];
 
 let idCount = links.length;
 const resolvers = {
   Query: {
-    info: () => `This is the API of a Hackernews Clone`,
+    info: () => `Testing for now`,
     feed: () => links
   },
   Mutation: {
