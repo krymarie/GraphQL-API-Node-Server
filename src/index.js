@@ -14,6 +14,16 @@ type Link {
   id: ID!
   description: String!
 }
+
+type AddClient {   
+  id: String!
+  name: String!
+   address: String!
+   phone: String!
+   interestLevel: Int!
+   createdAt: DateTime!
+   updatedAt: DateTime!
+ }
 `;
 
 let links = [

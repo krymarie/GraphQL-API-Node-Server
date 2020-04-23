@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
   info: String!
   feed: [Link!]!
@@ -12,3 +14,54 @@ type Link {
   description: String!
   url: String!
 }
+# everything above was my tutorial this is all custom for my new frontend
+type Client {
+  id: String!
+  name: String!
+  address: String!
+  phone: String!
+  interestLevel: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input NewClient {
+  id: String!
+  name: String!
+  address: String!
+  phone: String!
+  interestLevel: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input UpdateClient {
+  id: String
+  name: String
+  address: String
+  phone: String
+  interestLevel: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UniqueID {
+  id: String
+}
+
+type Query {
+  Address(address: String): [Client!]!
+  Client(id: ID): Client
+  Clients(searchString: String): [Client!]!
+}
+
+# type Query {
+#   Client(id: ID): Client
+#   Clients(searchString: Client): [Client!]!
+# }
+
+# type Mutation {
+#   AddClient(data: ProductCreateInput!): Client!
+#   NewClient(data: NewClient!, where: UniqueID!): Client
+#   ClientUpdate(data: UniqueID!, where: UniqueID!): Client
+# }
