@@ -48,12 +48,12 @@ npm run launchDocker
 ```
 
 ```
-npm run creatrDatabase
+npm run creatrDB
 ```
 
-```
-npm run whenyourdone
-```
+``` 
+npm run generate
+``` 
 
 ```
 npm run seed
@@ -62,9 +62,12 @@ npm run seed
 ```
 npm run dev
 ```
+Prisma Studio is now on http://localhost:5555/
 
+### In a new terminal window
 ```
 npm start
 ```
+GraphQL Playground is now on http://localhost:4000/
 
 ## More info here about how to use api...
