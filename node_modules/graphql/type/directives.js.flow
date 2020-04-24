@@ -1,6 +1,7 @@
 // @flow strict
 
 import objectEntries from '../polyfills/objectEntries';
+import { SYMBOL_TO_STRING_TAG } from '../polyfills/symbols';
 
 import inspect from '../jsutils/inspect';
 import toObjMap from '../jsutils/toObjMap';
@@ -8,7 +9,6 @@ import devAssert from '../jsutils/devAssert';
 import instanceOf from '../jsutils/instanceOf';
 import defineToJSON from '../jsutils/defineToJSON';
 import isObjectLike from '../jsutils/isObjectLike';
-import defineToStringTag from '../jsutils/defineToStringTag';
 import {
   type ReadOnlyObjMap,
   type ReadOnlyObjMapLike,
@@ -56,16 +56,16 @@ export class GraphQLDirective {
   name: string;
   description: ?string;
   locations: Array<DirectiveLocationEnum>;
-  isRepeatable: boolean;
   args: Array<GraphQLArgument>;
+  isRepeatable: boolean;
   extensions: ?ReadOnlyObjMap<mixed>;
   astNode: ?DirectiveDefinitionNode;
 
-  constructor(config: GraphQLDirectiveConfig): void {
+  constructor(config: $ReadOnly<GraphQLDirectiveConfig>): void {
     this.name = config.name;
     this.description = config.description;
     this.locations = config.locations;
-    this.isRepeatable = config.isRepeatable != null && config.isRepeatable;
+    this.isRepeatable = config.isRepeatable ?? false;
     this.extensions = config.extensions && toObjMap(config.extensions);
     this.astNode = config.astNode;
 
@@ -75,31 +75,27 @@ export class GraphQLDirective {
       `@${config.name} locations must be an Array.`,
     );
 
-    const args = config.args || {};
+    const args = config.args ?? {};
     devAssert(
       isObjectLike(args) && !Array.isArray(args),
       `@${config.name} args must be an object with argument names as keys.`,
     );
 
-    this.args = objectEntries(args).map(([argName, arg]) => ({
+    this.args = objectEntries(args).map(([argName, argConfig]) => ({
       name: argName,
-      description: arg.description === undefined ? null : arg.description,
-      type: arg.type,
-      defaultValue: arg.defaultValue,
-      extensions: arg.extensions && toObjMap(arg.extensions),
-      astNode: arg.astNode,
+      description: argConfig.description,
+      type: argConfig.type,
+      defaultValue: argConfig.defaultValue,
+      extensions: argConfig.extensions && toObjMap(argConfig.extensions),
+      astNode: argConfig.astNode,
     }));
-  }
-
-  toString(): string {
-    return '@' + this.name;
   }
 
   toConfig(): {|
     ...GraphQLDirectiveConfig,
     args: GraphQLFieldConfigArgumentMap,
-    extensions: ?ReadOnlyObjMap<mixed>,
     isRepeatable: boolean,
+    extensions: ?ReadOnlyObjMap<mixed>,
   |} {
     return {
       name: this.name,
@@ -111,10 +107,17 @@ export class GraphQLDirective {
       astNode: this.astNode,
     };
   }
+
+  toString(): string {
+    return '@' + this.name;
+  }
+
+  // $FlowFixMe Flow doesn't support computed properties yet
+  get [SYMBOL_TO_STRING_TAG]() {
+    return 'GraphQLDirective';
+  }
 }
 
-// Conditionally apply `[Symbol.toStringTag]` if `Symbol`s are supported
-defineToStringTag(GraphQLDirective);
 defineToJSON(GraphQLDirective);
 
 export type GraphQLDirectiveConfig = {|
@@ -183,7 +186,7 @@ export const GraphQLDeprecatedDirective = new GraphQLDirective({
     reason: {
       type: GraphQLString,
       description:
-        'Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax (as specified by [CommonMark](https://commonmark.org/).',
+        'Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/).',
       defaultValue: DEFAULT_DEPRECATION_REASON,
     },
   },
@@ -198,9 +201,8 @@ export const specifiedDirectives = Object.freeze([
   GraphQLDeprecatedDirective,
 ]);
 
-export function isSpecifiedDirective(directive: mixed): boolean %checks {
-  return (
-    isDirective(directive) &&
-    specifiedDirectives.some(({ name }) => name === directive.name)
-  );
+export function isSpecifiedDirective(
+  directive: GraphQLDirective,
+): boolean %checks {
+  return specifiedDirectives.some(({ name }) => name === directive.name);
 }

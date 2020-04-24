@@ -1,17 +1,14 @@
 import Maybe from '../tsutils/Maybe';
 import { PromiseOrValue } from '../jsutils/PromiseOrValue';
-import { Path, addPath, pathToArray } from '../jsutils/Path';
+import { Path } from '../jsutils/Path';
 
 import { GraphQLError } from '../error/GraphQLError';
-import { locatedError } from '../error/locatedError';
 
 import {
-  DirectiveNode,
   DocumentNode,
   OperationDefinitionNode,
   SelectionSetNode,
   FieldNode,
-  InlineFragmentNode,
   FragmentDefinitionNode,
 } from '../language/ast';
 import { GraphQLSchema } from '../type/schema';
@@ -37,11 +34,7 @@ export interface ExecutionContext {
   operation: OperationDefinitionNode;
   variableValues: { [key: string]: any };
   fieldResolver: GraphQLFieldResolver<any, any>;
-  errors: GraphQLError[];
-}
-
-export interface ExecutionResultDataDefault {
-  [key: string]: any;
+  errors: Array<GraphQLError>;
 }
 
 /**
@@ -50,10 +43,9 @@ export interface ExecutionResultDataDefault {
  *   - `errors` is included when any errors occurred as a non-empty array.
  *   - `data` is the result of a successful execution of the query.
  */
-// TS_SPECIFIC: TData and ExecutionResultDataDefault
-export interface ExecutionResult<TData = ExecutionResultDataDefault> {
+export interface ExecutionResult {
   errors?: ReadonlyArray<GraphQLError>;
-  data?: TData | null;
+  data?: { [key: string]: any } | null;
 }
 
 export type ExecutionArgs = {
@@ -79,10 +71,8 @@ export type ExecutionArgs = {
  *
  * Accepts either an object with named arguments, or individual arguments.
  */
-export function execute<TData = ExecutionResultDataDefault>(
-  args: ExecutionArgs,
-): PromiseOrValue<ExecutionResult<TData>>;
-export function execute<TData = ExecutionResultDataDefault>(
+export function execute(args: ExecutionArgs): PromiseOrValue<ExecutionResult>;
+export function execute(
   schema: GraphQLSchema,
   document: DocumentNode,
   rootValue?: any,
@@ -91,7 +81,7 @@ export function execute<TData = ExecutionResultDataDefault>(
   operationName?: Maybe<string>,
   fieldResolver?: Maybe<GraphQLFieldResolver<any, any>>,
   typeResolver?: Maybe<GraphQLTypeResolver<any, any>>,
-): PromiseOrValue<ExecutionResult<TData>>;
+): PromiseOrValue<ExecutionResult>;
 
 /**
  * Essential assertions before executing to provide developer feedback for
@@ -144,15 +134,18 @@ export function buildResolveInfo(
   path: Path,
 ): GraphQLResolveInfo;
 
-// Isolates the "ReturnOrAbrupt" behavior to not de-opt the `resolveField`
-// function. Returns the result of resolveFn or the abrupt-return Error object.
-// TS_SPECIFIC: TSource
-export function resolveFieldValueOrError<TSource>(
+/**
+ * Isolates the "ReturnOrAbrupt" behavior to not de-opt the `resolveField`
+ * function. Returns the result of resolveFn or the abrupt-return Error object.
+ *
+ * @internal
+ */
+export function resolveFieldValueOrError(
   exeContext: ExecutionContext,
-  fieldDef: GraphQLField<TSource, any>,
+  fieldDef: GraphQLField<any, any>,
   fieldNodes: ReadonlyArray<FieldNode>,
-  resolveFn: GraphQLFieldResolver<TSource, any>,
-  source: TSource,
+  resolveFn: GraphQLFieldResolver<any, any>,
+  source: any,
   info: GraphQLResolveInfo,
 ): Error | any;
 
@@ -177,7 +170,7 @@ export const defaultTypeResolver: GraphQLTypeResolver<any, any>;
 export const defaultFieldResolver: GraphQLFieldResolver<any, any>;
 
 /**
- * This method looks up the field on the given type defintion.
+ * This method looks up the field on the given type definition.
  * It has special casing for the two introspection fields, __schema
  * and __typename. __typename is special because it can always be
  * queried as a field, even in situations where no other fields

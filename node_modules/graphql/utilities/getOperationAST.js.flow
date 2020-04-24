@@ -18,7 +18,7 @@ export function getOperationAST(
   let operation = null;
   for (const definition of documentAST.definitions) {
     if (definition.kind === Kind.OPERATION_DEFINITION) {
-      if (!operationName) {
+      if (operationName == null) {
         // If no operation name was provided, only return an Operation if there
         // is one defined in the document. Upon encountering the second, return
         // null.
@@ -26,7 +26,7 @@ export function getOperationAST(
           return null;
         }
         operation = definition;
-      } else if (definition.name && definition.name.value === operationName) {
+      } else if (definition.name?.value === operationName) {
         return definition;
       }
     }

@@ -6,6 +6,8 @@
   "author": "Krystal Mitchell <10262399@my.uvu.edu>",
   "license": "MIT",
   "dependencies": {
-    "graphql-yoga": "^1.18.3"
+    "graphql": "^15.0.0",
+    "graphql-yoga": "^1.18.3",
+    "nexus": "^0.20.0"
   }
 }

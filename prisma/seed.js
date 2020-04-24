@@ -23,7 +23,7 @@ function loadClients() {
 
 async function main() {
   try {
-    const allClients = loadVehicles();
+    const allClients = loadClients();
     for (let client of allClients) {
       await prismaClient.client
         .create(client)
