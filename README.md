@@ -1,6 +1,16 @@
 # GraphQL-API-Node-Server
+# While in Dev modeto quickly see prisma
+ 
+```
+npm install
+```
+ 
+```
+node src/index.js
+```
 
-## server install, and run process
+
+## server install, and run process (working out a few bugs still)
 ```
 npm install
 ```
