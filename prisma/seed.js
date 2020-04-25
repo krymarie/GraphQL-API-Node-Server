@@ -6,16 +6,16 @@ const prismaClient = new PrismaClient();
 const all_clients = fs.readFileSync("prisma/seeders/clientSeeder.json");
 
 function loadClients() {
-  const client = JSON.parse(all_clients);
-  const allClients = client.client;
-  return allClients.map(client => {
+  const clientParse= JSON.parse(all_clients);
+  const allClients = clientParse.dummyclients; //name of data in seeder file
+  return allClients.map(clnt => {
     return {
       data: {
-        name: client.name,
-        status: client.status,
-        address: client.address,
-        phone: client.phone,
-        interestLevel: client.interestLevel
+        name: clnt.name,
+        status: clnt.status,
+        address: clnt.address,
+        phone: clnt.phone,
+        interestLevel: clnt.interestLevel
       }
     };
   });
@@ -25,10 +25,11 @@ async function main() {
   try {
     const allClients = loadClients();
     for (let clnt of allClients) {
-      console.log(clnt);
-      console.log(prismaClient.client);
-      await prismaClient.client.create(clnt)
-        .catch(err => console.log(`Error trying to full default clients: ${err} client: ${clnt.data}`));
+      // console.log(clnt); //clearly there
+      // console.log(prismaClient.client); //undefined
+      console.log(prismaClient); //undefined
+      await prismaClient.clnt.create(clnt)
+        .catch(err => console.log(`Error trying to import clients: ${err} client: ${clnt}`));
     }
   } catch (err) {
     console.log(err);
