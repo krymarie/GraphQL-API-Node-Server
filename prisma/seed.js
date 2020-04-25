@@ -3,11 +3,11 @@ import fs from "fs";
 
 const prismaClient = new PrismaClient();
 
-const defaultClients = fs.readFileSync("prisma/seeders/clientSeeder.json");
+const all_clients = fs.readFileSync("prisma/seeders/clientSeeder.json");
 
 function loadClients() {
-  const client = JSON.parse(defaultClients);
-  const allClients = client.defaultClients;
+  const client = JSON.parse(all_clients);
+  const allClients = client.client;
   return allClients.map(client => {
     return {
       data: {
@@ -24,14 +24,10 @@ function loadClients() {
 async function main() {
   try {
     const allClients = loadClients();
-    for (let client of allClients) {
-      await prismaClient.client
-        .create(client)
-        .catch(err =>
-          console.log(
-            `Error trying to full default clients: ${err} client: ${client}`
-          )
-        );
+    for (let clnt of allClients) {
+      console.log(clnt);
+      await prismaClient.client.create(clnt)
+        .catch(err => console.log(`Error trying to full default clients: ${err} client: ${clnt.data}`));
     }
   } catch (err) {
     console.log(err);
