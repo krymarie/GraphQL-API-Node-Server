@@ -16,7 +16,7 @@ export const Mutation = mutationType({
 				status: stringArg(),
 				address: stringArg(),
 				phone: stringArg(),
-				interestLevel: intArg({ nullable: false })
+				interestLevel: stringArg({ nullable: false })
 			},
 			resolve: (parent, { name, status, address, phone, interestLevel }, ctx) => {
 				return ctx.prisma.product.create({

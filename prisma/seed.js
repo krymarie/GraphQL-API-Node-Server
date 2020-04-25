@@ -26,6 +26,7 @@ async function main() {
     const allClients = loadClients();
     for (let clnt of allClients) {
       console.log(clnt);
+      console.log(prismaClient.client);
       await prismaClient.client.create(clnt)
         .catch(err => console.log(`Error trying to full default clients: ${err} client: ${clnt.data}`));
     }

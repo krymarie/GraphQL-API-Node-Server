@@ -20,7 +20,7 @@ npm run launchDocker
 ```
 
 ```
-npm run creatrDB
+npm run createDB
 ```
 
 ``` 

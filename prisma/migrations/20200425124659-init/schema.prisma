@@ -14,7 +14,7 @@ model Product {
   address       String
   phone         String
   notes         String
-  interestLevel Int
+  interestLevel String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
