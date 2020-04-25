@@ -12,8 +12,7 @@ function loadClients() {
     return {
       data: {
         name: clnt.name,
-        status: clnt.status,
-        address: clnt.address,
+        content: clnt.content,
         phone: clnt.phone,
         interestLevel: clnt.interestLevel
       }

@@ -3,8 +3,7 @@
     {
       "id": "00001",
       "name": "Marry Jane",
-      "status": "Looking like late June for close",
-      "address": "1234 Westburry Way, Lehi UT, 84663",
+      "content": "Buyer seems very interested but need space to decide.",
       "phone": "801-555-5555",
       "interestLevel": "3",
       "createdAt": "1581510623",
@@ -13,8 +12,7 @@
     {
       "id": "00001",
       "name": "Dean Damajio",
-      "status": "Just waiting on funding",
-      "address": "1234 Westburry Way, Lehi UT, 84663",
+      "content": "Buyer seems very interested but need space to decide.",
       "phone": "801-555-5555",
       "interestLevel": "3",
       "createdAt": "1581510623",
@@ -23,8 +21,7 @@
     {
       "id": "00001",
       "name": "Frank Santino",
-      "status": "Tire kicking for now",
-      "address": "1234 Westburry Way, Lehi UT, 84663",
+      "content": "Buyer seems very interested but need space to decide.",
       "phone": "801-555-5555",
       "interestLevel": "3",
       "createdAt": "1581510623",
@@ -33,8 +30,7 @@
     {
       "id": "00001",
       "name": "Bobby Delarentes",
-      "status": "Ready to close just needs funding",
-      "address": "1234 Westburry Way, Lehi UT, 84663",
+      "content": "Buyer seems very interested but need space to decide.",
       "phone": "801-555-5555",
       "interestLevel": "3",
       "createdAt": "1581510623",
@@ -43,8 +39,7 @@
     {
       "id": "00001",
       "name": "Kate Naturi",
-      "status": "Not interested, but interested...",
-      "address": "1234 Westburry Way, Lehi UT, 84663",
+      "content": "Buyer seems very interested but need space to decide.",
       "phone": "801-555-5555",
       "interestLevel": "3",
       "createdAt": "1581510623",
@@ -53,8 +48,7 @@
     {
       "id": "00001",
       "name": "Aretha Francis",
-      "status": "Would be closed if she had time, simplify closing",
-      "address": "1234 Westburry Way, Lehi UT, 84663",
+      "content": "Buyer seems very interested but need space to decide.",
       "phone": "801-555-5555",
       "interestLevel": "3",
       "createdAt": "1581510623",
@@ -63,8 +57,7 @@
     {
       "id": "00001",
       "name": "Franklin Rosanto",
-      "status": "Done and done!",
-      "address": "1234 Westburry Way, Lehi UT, 84663",
+      "content": "Buyer seems very interested but need space to decide.",
       "phone": "801-555-5555",
       "interestLevel": "3",
       "createdAt": "1581510623",
@@ -73,8 +66,7 @@
     {
       "id": "00001",
       "name": "Martin Francis",
-      "status": "As Strong as I want to Be",
-      "address": "1234 Westburry Way, Lehi UT, 84663",
+      "content": "Buyer seems very interested but need space to decide.",
       "phone": "801-555-5555",
       "interestLevel": "3",
       "createdAt": "1581510623",
