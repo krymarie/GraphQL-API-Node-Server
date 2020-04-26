@@ -4,26 +4,24 @@ export const Mutation = mutationType({
 	name: 'Mutation',
 	definition(t) {
 
-		t.crud.createOneClient();
-		t.crud.updateOneClient();
-		t.crud.deleteOneClient();
+		// t.crud.createOneClient();
+		// t.crud.updateOneClient();
+		// t.crud.deleteOneClient();
 		
 	
 		t.field('createClient', {
 			type: 'Client',
 			args: {
 				name: stringArg({ nullable: false }),
-				status: stringArg(),
-				address: stringArg(),
+				content: stringArg(),
 				phone: stringArg(),
 				interestLevel: stringArg({ nullable: false })
 			},
-			resolve: (parent, { name, status, address, phone, interestLevel }, ctx) => {
+			resolve: (parent, { name, content, phone, interestLevel }, ctx) => {
 				return ctx.prisma.product.create({
 					data: {
 						name,
-						status,
-						address,
+						content,
 						phone,
 						interestLevel,
 					},

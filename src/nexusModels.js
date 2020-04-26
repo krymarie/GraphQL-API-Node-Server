@@ -5,8 +5,7 @@ const Client = objectType({
 	definition(t) {
 		t.model.id()
 		t.model.name()
-		t.model.status()
-		t.model.address()
+		t.model.content()
 		t.model.phone()
 		t.model.interestLevel()
 		t.model.createdAt()
