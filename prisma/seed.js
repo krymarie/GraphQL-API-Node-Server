@@ -28,7 +28,8 @@ async function main() {
       await prismaClient.client
         .create(clnt)
         .catch(err =>
-          console.log(`Error trying to import clients: ${err} client: ${clnt}`));
+          console.log(`Error trying to import clients: ${err} client: ${clnt}`)
+        );
     }
   } catch (err) {
     console.log(err);
