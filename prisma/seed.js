@@ -3,11 +3,11 @@ import fs from "fs";
 
 const prismaClient = new PrismaClient();
 
-const all_clients = fs.readFileSync("prisma/seeders/clientSeeder.json");
+const dummyclients = fs.readFileSync("prisma/seeders/clientSeeder.json");
 
 function loadClients() {
-  const clientParse= JSON.parse(all_clients);
-  const allClients = clientParse.dummyclients;
+  const clientParse = JSON.parse(dummyclients);
+  const allClients = clientParse.data;
   return allClients.map(clnt => {
     return {
       data: {
@@ -24,10 +24,15 @@ async function main() {
   try {
     const allClients = loadClients();
     for (let clnt of allClients) {
-      await prismaClient.product.create(clnt)
-        .catch(err => console.log(`Error trying to import clients: ${err} client: ${clnt}`));
+      console.log(clnt);
+      await prismaClient.client
+        .create(clnt)
+        .catch(err =>
+          console.log(`Error trying to import clients: ${err} client: ${clnt}`)
+        );
     }
   } catch (err) {
+    console.log(err);
   }
 }
 
