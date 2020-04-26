@@ -6,18 +6,20 @@
   "author": "Krystal Mitchell <10262399@my.uvu.edu>",
   "license": "MIT",
   "scripts": {
-    "nuke": "docker stop pgDocker && docker rm pgDocker && docker volume rm pgdata && rm -rf prisma/migrations",
+    "nuke": "docker stop pgDocker && docker rm pgDocker && docker volume rm pgdata && rm -rf prisma/migrations && rm -rf node_modules",
     "launchDocker": "docker run --name pgDocker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres:latest",
-    "createDB": "npx prisma2 migrate save --name 'init' --experimental && npx prisma2 migrate up --experimental",
-    "generate": "npx prisma2 generate",
+    "createDB": "npx @prisma/cli migrate save --name 'init' --experimental && npx @prisma/cli migrate up --experimental",
+    "generate": "npx @prisma/cli generate",
     "postinstall": "npm -s run generate",
     "seed": "node -r esm prisma/seed",
-    "dev": "npx prisma2 studio --experimental",
+    "restart": "npm run nuke && npm install && npm run launchDocker && wait-on tcp:5432 && npm run createDB && npm run generate && npm run seed",
+    "new": "npm install && npm run launchDocker && npm run createDB && npm run generate && npm run seed",
+    "dev": "npx @prisma/cli studio --experimental",
     "start": "node -r esm ./src/server"
   },
   "dependencies": {
     "@nexus/schema": "^0.13.1",
-    "@prisma/client": "2.0.0-preview024",
+    "@prisma/client": "^2.0.0-beta.3",
     "apollo-server": "^2.11.0",
     "esm": "^3.2.25",
     "graphql": "^14.5.0",
@@ -28,7 +30,7 @@
   },
   "devDependencies": {
     "@prisma/cli": "^2.0.0-beta.3",
-    "prisma2": "2.0.0-preview022"
+    "wait-on": "^4.0.1"
   },
   "engines": {
     "node": ">=10.0.0"
