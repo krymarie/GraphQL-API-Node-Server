@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Product {
+model Client {
   id            String   @default(cuid()) @id
   name          String
   content       String
