@@ -37,10 +37,6 @@ GraphQL Playground is now on http://localhost:4000/
 
 ## More info here about how to use api...
 
-Server is now running on prisma http://localhost:4000
-
-## Once completed the build instructions below will be needed
-
 ## Prisma as your data modeling tool
 
 http://localhost:4000
