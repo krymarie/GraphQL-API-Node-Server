@@ -1,7 +1,7 @@
-# Client CLOUT
-## client integration solutions
+# Client CLOUT GraphQL API 
+## Client Integration Solutions
 
-# GraphQL-API-Node-Server
+
 
 ## server install, and run process (working out a few bugs still)
 ```
